@@ -46,6 +46,36 @@ namespace Taskfy.Api.Controllers
             return Conflict();
         }
 
+        [HttpPut("{id}")]
+        public IActionResult Put(Guid id, [FromBody] TarefaDto tarefa)
+        {
+            if (ModelState.IsValid)
+            {
+                var index = _minhasTarefas.FindIndex(item => item.Id == id);
+                if (index >= 0)
+                {
+                    var itemAntigo = _minhasTarefas[index];
+                    itemAntigo.AtualizaTarefa(tarefa.Titulo, tarefa.Descricao);
 
+                    return Ok(itemAntigo);
+                }
+                return NotFound();
+            }
+
+            return BadRequest();
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(Guid id)
+        {
+            var index = _minhasTarefas.FindIndex(item => item.Id == id);
+            if (index >= 0)
+            {
+                _minhasTarefas.RemoveAt(index);
+
+                return Ok();
+            }
+            return NotFound();
+        }
     }
 }
