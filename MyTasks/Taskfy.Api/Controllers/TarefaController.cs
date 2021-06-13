@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,5 +32,20 @@ namespace Taskfy.Api.Controllers
 
             return Ok(tarefa);
         }
+
+        [HttpPost]
+        public IActionResult Post([FromBody] TarefaDto tarefa)
+        {
+            if (ModelState.IsValid)
+            {
+                var novaTarefa = new Tarefa(tarefa.Titulo, tarefa.Descricao);
+                _minhasTarefas.Add(novaTarefa);
+
+                return StatusCode(StatusCodes.Status201Created, novaTarefa);
+            }
+            return Conflict();
+        }
+
+
     }
 }
