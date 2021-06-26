@@ -28,7 +28,7 @@ jobs:
       uses: google-github-actions/deploy-cloudrun@main
       with:
         service: at-devops-ms1
-        image: gcr.io/cloudrun/at-devops-ms1
+        image:  gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_APP_NAME }}
         credentials: ${{ secrets.GCP_SA_KEY }}
 
     - name: Use Output
