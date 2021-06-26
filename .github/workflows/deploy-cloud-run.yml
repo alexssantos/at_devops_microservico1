@@ -27,7 +27,7 @@ jobs:
       id: deploy
       uses: google-github-actions/deploy-cloudrun@main
       with:
-        service: ${{ secrets.SERVICE_ID }}
+        service: at-devops-ms1
         image: gcr.io/cloudrun/at-devops-ms1
         credentials: ${{ secrets.GCP_SA_KEY }}
 
