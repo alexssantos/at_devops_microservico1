@@ -57,7 +57,7 @@ jobs:
       run: docker push $IMAGE_NAME
 
     - name: Deploy Docker image
-      run: gcloud run deploy ${{ secrets.GCP_PROJECT_ID }} --image $IMAGE_NAME --platform managed --project ${{ secrets.GCP_PROJECT_ID }}
+      run: gcloud run deploy ${{ secrets.GCP_PROJECT_ID }} --image $IMAGE_NAME --region us-central1 --platform managed --project ${{ secrets.GCP_PROJECT_ID }}
 
     - name: Use Output
       run: curl "${{ steps.deploy.outputs.url }}"
