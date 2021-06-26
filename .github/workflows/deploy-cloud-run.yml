@@ -48,7 +48,7 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Build Docker image
-      run: cd /Taskfy.Api && docker build . -t $IMAGE_NAME 
+      run: cd Taskfy.Api && docker build . -t $IMAGE_NAME 
 
     - name: Test Docker image
       run: docker run $IMAGE_NAME sh -c "dotnet test --no-build --verbosity normal" 
