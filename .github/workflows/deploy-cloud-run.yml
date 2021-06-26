@@ -1,4 +1,4 @@
-name: .NET - deploy main
+name: deploy cloud run
 
 on:
   push:
@@ -23,3 +23,13 @@ jobs:
       run: dotnet build --no-restore
     - name: Test
       run: dotnet test --no-build --verbosity normal
+    - name: Deploy to Cloud Run
+      id: deploy
+      uses: google-github-actions/deploy-cloudrun@main
+      with:
+        service: ${{ secrets.SERVICE_ID }}
+        image: gcr.io/cloudrun/at-devops-ms1
+        credentials: ${{ secrets.GCP_SA_KEY }}
+
+    - name: Use Output
+      run: curl "${{ steps.deploy.outputs.url }}"
