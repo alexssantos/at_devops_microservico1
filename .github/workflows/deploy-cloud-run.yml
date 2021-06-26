@@ -50,8 +50,8 @@ jobs:
     - name: Build Docker image
       run: docker build . -t $IMAGE_NAME -f Taskfy.Api/Dockerfile
 
-    - name: Test Docker image
-      run: docker run $IMAGE_NAME sh -c "dotnet test --no-build --verbosity normal" 
+    #- name: Test Docker image
+    #  run: docker run $IMAGE_NAME sh -c "dotnet test --no-build --verbosity normal" 
 
     - name: Push Docker image
       run: docker push $IMAGE_NAME
