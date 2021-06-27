@@ -27,7 +27,7 @@ jobs:
       run: dotnet test --no-build --verbosity normal
 
   deploy:
-      
+    needs: [build]
     name: Setup Gcloud Account
     runs-on: ubuntu-latest
     env:
@@ -60,13 +60,12 @@ jobs:
       id: deploy
       uses: google-github-actions/deploy-cloudrun@main
       with:
-        service: hello-cloud-run 
-        image: gcr.io/cloudrun/hello
+        service: at_devops_ms1
+        image: $IMAGE_NAME
         credentials: ${{ secrets.GCP_CREDENTIALS }}
 
     - name: Use Output
-      run: curl "${{ steps.deploy.outputs.url }}"
-      
+      run: curl "${{ steps.deploy.outputs.url }}"     
 
     #- name: Deploy Docker image
      # run: gcloud run deploy ${{ secrets.GCP_PROJECT_ID }} --image $IMAGE_NAME --region us-central1 --platform managed --project ${{ secrets.GCP_PROJECT_ID }} --port 8080
