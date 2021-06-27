@@ -60,7 +60,7 @@ jobs:
       id: deploy
       uses: google-github-actions/deploy-cloudrun@main
       with:
-        service: at_devops_ms1
+        service: at-devops-ms1
         image: $IMAGE_NAME
         credentials: ${{ secrets.GCP_CREDENTIALS }}
 
